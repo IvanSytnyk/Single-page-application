@@ -12,7 +12,8 @@ class Api {
       });
 
       const data = await res.json();
-      return await data.results;
+      //return await data.results;
+      return data.results;
     } catch (err) {
       console.log("Error ", err);
     }
@@ -28,7 +29,7 @@ class Api {
       );
 
       const data = await res.json();
-      return await data;
+      return data;
     } catch (err) {
       console.log("Error ", err);
     }

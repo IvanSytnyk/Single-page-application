@@ -2,7 +2,7 @@ import { Films } from "./pages/popular.js";
 import { NotFound } from "./pages/NotFound.js";
 import { Movie } from "./pages/movie.js";
 
-const root = document.getElementById("app");
+const root = document.getElementById('app');
 
 //Films();
 //NotFound();
@@ -10,13 +10,13 @@ const root = document.getElementById("app");
 const routes = [
   {
     match: (url) => {
-      return url === "/";
+      return url === '/';
     },
     renderRoute: Films,
   },
   {
     match: (url) => {
-      return url.includes("/movies/");
+      return url.includes('/movies/');
     },
     renderRoute: Movie,
   },
@@ -33,11 +33,11 @@ class Router {
     window.history.pushState = (data, title, ulr) => {
       History.prototype.pushState.apply(window.history, [data, title, ulr]);
       this.reroute();
-    };
+    }
 
     window.onpopstate = () => {
       this.reroute();
-    };
+    }
   }
 
   reroute() {
@@ -45,10 +45,12 @@ class Router {
       const matched = route.match(window.location.pathname);
 
       return matched;
-    });
+    })
 
     matchedRoute.renderRoute();
   }
 }
 
 const router = new Router(routes);
+
+router.reroute();
