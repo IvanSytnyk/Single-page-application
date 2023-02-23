@@ -28,14 +28,20 @@ export const Films = (isLiked) => {
   root.innerHTML = `
         <div>
             <header>
-                <i class="fa-solid fa-film fa-2xl"></i>
-                <h1>${isLiked ? "Bookmarks" : " TheMovieDB PoC"}</h1>
+                <div class = "head">
+                  <i class="fa-solid fa-film fa-2xl"></i>
+                  <h1>${isLiked ? "Bookmarks" : " TheMovieDB PoC"}</h1>
+                </div>
+                ${!isLiked ? '<button id="books">Bookmarks</button>' : "" }
             </header>
             <ul class="list" id="list"></ul>
         </div>
     `;
 
   const listof = document.querySelector("ul");
+  const icon = document.querySelector("i");
+  const books = document.getElementById("books");
+
   const renderPopularMovies = async (isLiked) => {
     const filmList = await asyncProvider(
       async () => await Api.fetchPopularMovies()
@@ -87,6 +93,18 @@ export const Films = (isLiked) => {
       return;
     }
   });
+
+  icon.addEventListener("click", (evt) => {
+      window.history.pushState(null, null, `/`);
+      return;
+  })
+
+  if (books) {
+    books.addEventListener("click", (evt) => {
+      window.history.pushState(null, null, `/bookmarks`);
+      return;
+    })
+  } 
 
   renderPopularMovies(isLiked);
 };

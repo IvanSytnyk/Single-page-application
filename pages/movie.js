@@ -17,9 +17,9 @@ export const Movie = async () => {
                   }" alt="${film.original_title}">
                   <h2>${film.original_title}</h2>
                   <h3>Popularity - ${film.popularity}</h3>
-                  <p>Overview - ${film.overview}</p>
-                  <h3>Genres - ${film.genres.map((film) => {
-                    return film.name;
+                  <p><strong>Overview</strong> - ${film.overview}</p>
+                  <h3>Genres : ${film.genres.map((film) => {
+                    return " "+film.name;
                   })}
                   </h3>
                 </li>
