@@ -28,6 +28,7 @@ export const Films = (isLiked) => {
   root.innerHTML = `
         <div>
             <header>
+                <i class="fa-solid fa-film fa-2xl"></i>
                 <h1>${isLiked ? "Bookmarks" : " TheMovieDB PoC"}</h1>
             </header>
             <ul class="list" id="list"></ul>

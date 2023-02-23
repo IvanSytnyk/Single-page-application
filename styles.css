@@ -20,6 +20,17 @@ header {
     text-align: center;
 }
 
+.fa-solid {
+    display: inline;
+    vertical-align: 0;
+    cursor: pointer;
+}
+
+header > h1 {
+    display: inline;
+    
+}
+
 ul {
     display: flex;
     justify-content: center;
