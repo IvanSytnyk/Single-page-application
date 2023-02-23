@@ -30,11 +30,14 @@ export const Films = (isLiked) => {
             <header>
                 <div class = "head">
                   <i class="fa-solid fa-film fa-2xl"></i>
-                  <h1>${isLiked ? "Bookmarks" : " TheMovieDB PoC"}</h1>
+                  <h1 id="heading">${isLiked ? "Bookmarks" : " TheMovieDB PoC"}</h1>
                 </div>
                 ${!isLiked ? '<button id="books">Bookmarks</button>' : "" }
             </header>
-            <ul class="list" id="list"></ul>
+            <div class="list" id="list">
+              <ul>
+              </ul>
+            </div>
         </div>
     `;
 

@@ -8,8 +8,9 @@ export const Movie = async () => {
   const [, id] = pathname.split("movies/");
 
   const film = await asyncProvider(async () => await Api.fetchMovieDetails(id));
-  root.innerHTML = `
-              <ul>
+  
+  const movie = document.getElementById("list");
+  movie.innerHTML = `
                 <li>
                   <h1>Movie ${id}</h1>
                   <img src="https://www.themoviedb.org/t/p/w200/${
@@ -23,7 +24,6 @@ export const Movie = async () => {
                   })}
                   </h3>
                 </li>
-              </ul>
         `;
 };
 
