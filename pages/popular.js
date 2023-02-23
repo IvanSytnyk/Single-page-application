@@ -30,9 +30,7 @@ export const Films = (isLiked) => {
             <header>
                 <div class = "head">
                   <i class="fa-solid fa-film fa-2xl"></i>
-                  <h1 id="heading">${
-                    isLiked ? "Bookmarks" : " TheMovieDB PoC"
-                  }</h1>
+                  <h1 id="heading">TheMovieDB PoC</h1>
                 </div>
                 ${!isLiked ? '<button id="books">Bookmarks</button>' : ""}
                 <div class="search">
@@ -52,6 +50,7 @@ export const Films = (isLiked) => {
   const icon = document.querySelector("i");
   const books = document.getElementById("books");
   const input = document.querySelector("input");
+
 
   const renderPopularMovies = async (isLiked) => {
     const filmList = await asyncProvider(
@@ -120,8 +119,7 @@ export const Films = (isLiked) => {
   input.addEventListener('keypress', (evt) => {
     if (evt.key === 'Enter') {
       const searchQuery = evt.target.value;
-      window.history.pushState(null, null, `/search?query="${searchQuery}"`);
-      // /search?query=”Avengers”
+      window.history.pushState(null, null, `/search?query=${searchQuery}`);
     }
   })
 
