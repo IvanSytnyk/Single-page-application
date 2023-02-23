@@ -51,6 +51,7 @@ export const Films = (isLiked) => {
   const listof = document.querySelector("ul");
   const icon = document.querySelector("i");
   const books = document.getElementById("books");
+  const input = document.querySelector("input");
 
   const renderPopularMovies = async (isLiked) => {
     const filmList = await asyncProvider(
@@ -115,6 +116,14 @@ export const Films = (isLiked) => {
       return;
     })
   } 
+
+  input.addEventListener('keypress', (evt) => {
+    if (evt.key === 'Enter') {
+      const searchQuery = evt.target.value;
+      window.history.pushState(null, null, `/search?query="${searchQuery}"`);
+      // /search?query=”Avengers”
+    }
+  })
 
   renderPopularMovies(isLiked);
 };
