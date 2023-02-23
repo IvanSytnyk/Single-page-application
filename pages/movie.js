@@ -8,7 +8,6 @@ export const Movie = async () => {
   const [, id] = pathname.split("movies/");
 
   const film = await asyncProvider(async () => await Api.fetchMovieDetails(id));
-  console.log(film);
   root.innerHTML = `
             <li>
                 <h1>Movie ${id}</h1>
