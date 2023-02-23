@@ -87,11 +87,12 @@ button {
     background-color: #f1f1f1;
     color: black;
     font-size: 16px;
-    padding: 16px 30px;
+    /* padding: 16px 30px; */
     border: none;
     cursor: pointer;
     border-radius: 5px;
     text-align: center;
+    height: 44px;
   }
   
 button:hover {
@@ -168,4 +169,42 @@ button:active {
         height: 72px;
         opacity: 0;
     }
+}
+
+.search {
+    margin-top: 8px;
+    border-radius: 5px;
+    border-style: solid;
+    outline: none;
+    border: 1px solid #dfe1e5;
+    height: 44px;
+    /* width: auto; */
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #f1f3f4;
+    justify-content: center;
+}
+
+input {   
+    margin-left: 40px;
+    border:none;
+    font-size: 20px;
+    line-height: 24px;
+    outline: none;
+    width: 100%;
+    background-color: transparent;
+    position: relative;
+}
+
+.search:hover {
+    box-shadow: 0 1px 6px rgba(32,33,36,.28);
+}
+
+#svg {
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+    position: relative;
+    left: 10px;
 }
