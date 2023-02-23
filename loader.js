@@ -1,5 +1,5 @@
 export const asyncProvider = async (func) => {
-  let body = document.getElementById("list");
+  let body = document.querySelector("body");
 
   let loadingElement = document.createElement("loading");
 
