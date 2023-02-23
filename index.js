@@ -1,6 +1,8 @@
 import { Films } from "./pages/popular.js";
 import { NotFound } from "./pages/NotFound.js";
 import { Movie } from "./pages/movie.js";
+import { Bookmark } from "./pages/bookmark.js";
+import { Search } from "./pages/search.js";
 
 const root = document.getElementById('app');
 
@@ -19,6 +21,18 @@ const routes = [
       return url.includes('/movies/');
     },
     renderRoute: Movie,
+  },
+  {
+    match: (url) => {
+      return url === '/bookmarks';
+    },
+    renderRoute: Bookmark,
+  },
+  {
+    match: (url) => {
+      return url === '/search';
+    },
+    renderRoute: Search,
   },
   {
     match: () => true,
