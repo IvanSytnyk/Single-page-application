@@ -2,7 +2,7 @@ import Api from "../Api.js";
 import { asyncProvider } from "../loader.js";
 
 //const filmList = await asyncProvider(async () => await Api.fetchPopularMovies()); //const filmList = await asyncProvider(Api.fetchPopularMovies.bind(Api));
-const root = document.getElementById('app');
+const root = document.getElementById("app");
 
 const readLocalStorage = () => {
   let arr = localStorage.getItem("id");
@@ -11,7 +11,7 @@ const readLocalStorage = () => {
     arr = [];
   }
   return arr;
-}; 
+};
 
 const setLocalStorage = (id) => {
   let arr = readLocalStorage();
@@ -24,59 +24,68 @@ const setLocalStorage = (id) => {
   return localStorage.setItem("id", JSON.stringify(arr));
 };
 
-export const Films = () => {
+export const Films = (isLiked) => {
   root.innerHTML = `
         <div>
             <header>
-                <h1>TheMovieDB PoC</h1>
+                <h1>${isLiked ? "Bookmarks" : " TheMovieDB PoC"}</h1>
             </header>
             <ul class="list" id="list"></ul>
         </div>
     `;
-    const renderPopularMovies = async () => {
-      const listof = document.querySelector("ul");
-      const filmList = await asyncProvider(async () => await Api.fetchPopularMovies());
 
-      filmList.map((film) => {
-        const popularFilm = document.createElement("li");
+  const listof = document.querySelector("ul");
+  const renderPopularMovies = async (isLiked) => {
+    const filmList = await asyncProvider(
+      async () => await Api.fetchPopularMovies()
+    );
 
-        const arrid = readLocalStorage();
-        const { id, poster_path, original_title } = film;
-        popularFilm.dataset.movie_id = id;
+    filmList.map((film) => {
+      const popularFilm = document.createElement("li");
 
-        popularFilm.innerHTML = `
+      const arrid = readLocalStorage();
+      const { id, poster_path, original_title } = film;
+      popularFilm.dataset.movie_id = id;
+
+      popularFilm.innerHTML = `
                         <h3>${original_title}</h3>
                         <img src="https://www.themoviedb.org/t/p/w200/${poster_path}" alt="${original_title}">
-                        <a href="#" class="like-button ${ arrid.includes(""+id) ? "like-button-active" : ""} ">
+                        <a href="#" class="like-button ${
+                          arrid.includes("" + id) ? "like-button-active" : ""
+                        } ">
                             <i class="fas fa-heart"></i>
                         </a>
                 `;
-                
-        listof.append(popularFilm);
 
-      })
-
-      listof.addEventListener("click", (evt) => {
-        evt.preventDefault();
-
-        const film = evt.target.closest("li");
-        const likeButtons = evt.target.closest("a.like-button");
-        if (likeButtons !== null) {
-          likeButtons.classList.toggle("like-button-active");
-          setLocalStorage(evt.target.closest("li").dataset.movie_id);
-          return;
+      if (isLiked) {
+        if (arrid.includes("" + id)) {
+          listof.append(popularFilm);
         }
+      } else listof.append(popularFilm);
+    });
+  };
 
-        if (film !== null) {
-          window.history.pushState(
-            null,
-            null,
-            `/movies/${film.dataset.movie_id}`
-          );
-          return;
-        }
-      })
+  listof.addEventListener("click", (evt) => {
+    evt.preventDefault();
+
+    const film = evt.target.closest("li");
+    const likeButtons = evt.target.closest("a.like-button");
+    if (likeButtons !== null) {
+      likeButtons.classList.toggle("like-button-active");
+      setLocalStorage(evt.target.closest("li").dataset.movie_id);
+
+      if (isLiked) {
+          listof.innerHTML = ``;
+          renderPopularMovies(true);
+      }
+      return;
     }
 
-  renderPopularMovies();
+    if (film !== null) {
+      window.history.pushState(null, null, `/movies/${film.dataset.movie_id}`);
+      return;
+    }
+  });
+
+  renderPopularMovies(isLiked);
 };

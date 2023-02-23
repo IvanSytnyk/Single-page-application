@@ -9,19 +9,19 @@ export const Movie = async () => {
 
   const film = await asyncProvider(async () => await Api.fetchMovieDetails(id));
   root.innerHTML = `
-            <li>
-                <h1>Movie ${id}</h1>
-                <img src="https://www.themoviedb.org/t/p/w200/${
-                  film.poster_path
-                }" alt="${film.original_title}">
-                <h2>${film.original_title}</h2>
-                <h3>Popularity - ${film.popularity}</h3>
-                <p>Overview - ${film.overview}</p>
-                <h3>Genres - ${film.genres.map((film) => {
-                  return film.name;
-                })}
-                </h3>
-            </li>
+              <li>
+                  <h1>Movie ${id}</h1>
+                  <img src="https://www.themoviedb.org/t/p/w200/${
+                    film.poster_path
+                  }" alt="${film.original_title}">
+                  <h2>${film.original_title}</h2>
+                  <h3>Popularity - ${film.popularity}</h3>
+                  <p>Overview - ${film.overview}</p>
+                  <h3>Genres - ${film.genres.map((film) => {
+                    return film.name;
+                  })}
+                  </h3>
+              </li>
         `;
 };
 
