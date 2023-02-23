@@ -9,7 +9,8 @@ export const Movie = async () => {
 
   const film = await asyncProvider(async () => await Api.fetchMovieDetails(id));
   root.innerHTML = `
-              <li>
+              <ul>
+                <li>
                   <h1>Movie ${id}</h1>
                   <img src="https://www.themoviedb.org/t/p/w200/${
                     film.poster_path
@@ -21,7 +22,8 @@ export const Movie = async () => {
                     return film.name;
                   })}
                   </h3>
-              </li>
+                </li>
+              </ul>
         `;
 };
 
