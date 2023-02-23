@@ -1,9 +1,11 @@
 export const asyncProvider = async (func) => {
-  let body = document.querySelector("body");
+  let body = document.getElementById("list");
 
   let loadingElement = document.createElement("loading");
 
-  loadingElement.innerHTML = "Loading movies";
+  loadingElement.innerHTML = `
+  <div class="lds-ripple"><div></div><div></div></div>
+  `;
 
   body.append(loadingElement);
 

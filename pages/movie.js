@@ -11,6 +11,7 @@ export const Movie = async () => {
   
   const movie = document.getElementById("list");
   movie.innerHTML = `
+              <ul>
                 <li>
                   <h1>Movie ${id}</h1>
                   <img src="https://www.themoviedb.org/t/p/w200/${
@@ -24,6 +25,7 @@ export const Movie = async () => {
                   })}
                   </h3>
                 </li>
+              </ul>
         `;
 };
 
