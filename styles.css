@@ -6,12 +6,11 @@ body {
 
 #app {
     display: block;
-    justify-content: center;
 }
 
 header {
     padding: 0px 16px  16px;
-    border: 1px solid;
+    border: 1px solid #f2f2f2 ;
     background-color: white;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -24,22 +23,31 @@ header {
     cursor: pointer;
 }
 
-ul, .list {
+ul {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     padding: 0;
 }
 
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
 li {
     margin: 16px;
-    border: 1px solid;
-    background-color: white;
+    background-color: #f2f2f2;
     border-radius: 8px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 250px;
+    cursor: pointer;
+}
+
+li:hover {
+    box-shadow: 2px 2px 6px rgba(112, 107, 107, 0.239);
 }
 
 li > h2,h3,p {

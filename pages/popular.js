@@ -70,6 +70,7 @@ export const events = () => {
     if (evt.key === 'Enter') {
       const searchQuery = evt.target.value;
       window.history.pushState(null, null, `/search?query=${searchQuery}`); //приклад, /search?query=”Avengers”
+      return;
     }
   })
 }

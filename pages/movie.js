@@ -8,20 +8,21 @@ import { events } from "./popular.js";
 const root = document.getElementById('app');
 
 export const Movie = async () => {
-
   root.innerHTML = layout;
 
   const { pathname } = window.location;
   const [, id] = pathname.split("movies/");
   const film = await asyncProvider(async () => await Api.fetchMovieDetails(id));
-  const recommendations = await asyncProvider(async () => await Api.fetchRecommendations(id));
+  const recommendations = await asyncProvider(
+    async () => await Api.fetchRecommendations(id)
+  );
   const arrid = readLocalStorage();
   const list = document.getElementById("list");
   const movie = document.createElement("li");
-  const lem = document.createElement("h1");
+  const lem = document.createElement("div");
 
   movie.dataset.movie_id = id;
-  lem.innerHTML = `Recommendations:`
+  lem.innerHTML = `<h1>Recommendations:</h1>`;
   movie.innerHTML = `
                   <h1>Movie ${id}</h1>
                   <img src="https://www.themoviedb.org/t/p/w200/${
@@ -31,7 +32,7 @@ export const Movie = async () => {
                   <h3>Popularity - ${film.popularity}</h3>
                   <p><strong>Overview</strong> - ${film.overview}</p>
                   <h3>Genres : ${film.genres.map((film) => {
-                    return " "+film.name;
+                    return " " + film.name;
                   })}
                   </h3>
                   <a href="#" class="like-button ${
