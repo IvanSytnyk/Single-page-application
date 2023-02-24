@@ -8,7 +8,6 @@ const root = document.getElementById('app');
 
 export const Search = async () => {
   const [, find] = window.location.search.split("?query=");
-  const isLiked = false;
   root.innerHTML = layout;
 
   const film = await asyncProvider(async () => await Api.fetchMoviesBySearchText(find));
