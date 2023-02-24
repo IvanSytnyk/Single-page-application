@@ -10,7 +10,9 @@ const root = document.getElementById('app');
 
 export const Bookmark = async () => { 
 
-  const filmList = await Promise.all(readLocalStorage().map(id => Api.fetchMovieDetails(id)));
+  //const filmList = await Promise.all(readLocalStorage().map(id => Api.fetchMovieDetails(id)));
+  //const filmList = await Promise.all(readLocalStorage().map(async (id)  => await asyncProvider(async () => await Api.fetchMovieDetails(id))));
+  const filmList = await asyncProvider(async() => await Promise.all(readLocalStorage().map(id => Api.fetchMovieDetails(id))));
   root.innerHTML = layout;
 
   renderPopularMovies(filmList);
