@@ -15,6 +15,6 @@ export const Search = async () => {
   const pages = film.total_pages;
   console.log(pages);
 
-  renderPopularMovies(film.results, isLiked);
+  renderPopularMovies(film.results);
   events();
 };

@@ -157,8 +157,8 @@ input {
 .lds-ripple {
     /* display: inline-block; */
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 46%;
+    left: 47%;
     width: 80px;
     height: 80px;
 }

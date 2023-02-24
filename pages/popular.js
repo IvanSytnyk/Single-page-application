@@ -3,7 +3,7 @@ import { asyncProvider } from "../loader.js";
 
 //const filmList = await asyncProvider(async () => await Api.fetchPopularMovies()); //const filmList = await asyncProvider(Api.fetchPopularMovies.bind(Api));
 const root = document.getElementById("app");
-const isLiked = false;
+
 export const layout = `
   <div>
       <header>
@@ -11,7 +11,7 @@ export const layout = `
             <i class="fa-solid fa-film fa-2xl"></i>
             <h1 id="heading">TheMovieDB PoC</h1>
           </div>
-          ${!isLiked ? '<button id="books">Bookmarks</button>' : ""}
+          <button id="books">Bookmarks</button>
           <div class="search">
             <svg id="svg" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
               <input class="input" type="text" placeholder="Search">
@@ -25,6 +25,8 @@ export const layout = `
   </div>
 `;
 
+//${!isLiked ? '<button id="books">Bookmarks</button>' : ""}
+
 export const events = () => {
   const listof = document.querySelector("ul");
   const icon = document.querySelector("i");
@@ -33,7 +35,9 @@ export const events = () => {
   
   listof.addEventListener("click", (evt) => {
 
-    //evt.preventDefault();
+    if (window.location.pathname!=="/bookmarks") {
+      evt.preventDefault();
+    }
 
     const film = evt.target.closest("li");
     const likeButtons = evt.target.closest("a.like-button");
@@ -41,11 +45,6 @@ export const events = () => {
     if (likeButtons !== null) {
       likeButtons.classList.toggle("like-button-active");
       setLocalStorage(evt.target.closest("li").dataset.movie_id);
-      // if (isLiked) {
-      //     listof.innerHTML = ``;
-      //     renderPopularMovies(filmList, true);
-
-      // }
       return; 
     }
 
@@ -70,7 +69,7 @@ export const events = () => {
   input.addEventListener('keypress', (evt) => {
     if (evt.key === 'Enter') {
       const searchQuery = evt.target.value;
-      window.history.pushState(null, null, `/search?query=${searchQuery}`);
+      window.history.pushState(null, null, `/search?query=${searchQuery}`); //приклад, /search?query=”Avengers”
     }
   })
 }
@@ -95,7 +94,7 @@ export const setLocalStorage = (id) => {
   return localStorage.setItem("id", JSON.stringify(arr));
 };
 
-export const renderPopularMovies = (filmList, isLiked) => {
+export const renderPopularMovies = (filmList) => {
   const listof = document.querySelector("ul");
   filmList.map((film) => {
     const popularFilm = document.createElement("li");
@@ -113,21 +112,18 @@ export const renderPopularMovies = (filmList, isLiked) => {
                           <i class="fas fa-heart"></i>
                       </a>
               `;
-
-    if (isLiked) {
-      if (arrid.includes("" + id)) {
-        listof.append(popularFilm);
-      }
-    } else listof.append(popularFilm);
+    listof.append(popularFilm);
   });
 };
 
-export const Films = async (isLiked) => {
+export const Films = async () => {
+
   root.innerHTML = layout;
+
   const filmList = await asyncProvider(
     async () => await Api.fetchPopularMovies()
   );
 
-  renderPopularMovies(filmList, isLiked);
+  renderPopularMovies(filmList);
   events();
 };
