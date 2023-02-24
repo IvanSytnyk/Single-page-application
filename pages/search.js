@@ -28,7 +28,7 @@ export const Search = async () => {
     loadMoreButton.addEventListener("click", async () => {
       page = page + 1;
       const nfilm = await asyncProvider(async () => await Api.fetchMoviesBySearchText(`${find}&page=${page}`));
-      console.log(nfilm);
+      
       renderPopularMovies(nfilm.results);
       list.append(loadMoreButton);
 
