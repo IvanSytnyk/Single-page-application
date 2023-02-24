@@ -31,7 +31,6 @@ class Api {
           headers: this.headers,
         }
       );
-
       const data = await res.json();
       return data;
     } catch (err) {
@@ -47,9 +46,24 @@ class Api {
           headers: this.headers,
         }
       );
-      console.log();
       const data = await res.json();
       return data;
+    } catch (err) {
+      console.log("Error ", err);
+    }
+  }
+
+  async fetchRecommendations(id){
+    try {
+      const res = await fetch(
+        `${this.url}movie/${id}/recommendations?${API_KEY}&language=en-US&page=1`,
+        {
+          headers: this.headers,
+        }
+      );
+      console.log(`${this.url}movie/${id}/recommendations?${API_KEY}&language=en-US&page=1`);
+      const data = await res.json();
+      return data.results;
     } catch (err) {
       console.log("Error ", err);
     }
