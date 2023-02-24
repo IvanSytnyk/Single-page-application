@@ -16,7 +16,7 @@ export const Movie = async () => {
   const film = await asyncProvider(async () => await Api.fetchMovieDetails(id));
   const recommendations = await asyncProvider(async () => await Api.fetchRecommendations(id));
   const arrid = readLocalStorage();
-  const list = document.querySelector("ul");
+  const list = document.getElementById("list");
   const movie = document.createElement("li");
   const lem = document.createElement("h1");
 
@@ -40,8 +40,8 @@ export const Movie = async () => {
                       <i class="fas fa-heart"></i>
                   </a>
         `;
-  list.append(movie);
-  list.append(lem);
+  list.prepend(lem);
+  list.prepend(movie);
 
   renderPopularMovies(recommendations);
   events();

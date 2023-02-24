@@ -28,7 +28,7 @@ export const layout = `
 //${!isLiked ? '<button id="books">Bookmarks</button>' : ""}
 
 export const events = () => {
-  const listof = document.querySelector("ul");
+  const listof = document.getElementById("list");
   const icon = document.querySelector("i");
   const books = document.getElementById("books");
   const input = document.querySelector("input");
@@ -111,7 +111,6 @@ export const renderPopularMovies = (filmList) => {
                       } ">
                           <i class="fas fa-heart"></i>
                       </a>
-                      <div id="detailed"></div>
               `;
     listof.append(popularFilm);
   });

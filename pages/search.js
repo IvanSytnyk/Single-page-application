@@ -11,9 +11,13 @@ export const Search = async () => {
   root.innerHTML = layout;
 
   const film = await asyncProvider(async () => await Api.fetchMoviesBySearchText(find));
-  const pages = film.total_pages;
-  console.log(pages);
-
+  const pages = 1;//film.total_pages;
+  
+  const list = document.getElementById("list")
+  const results = document.createElement("h2"); 
+  results.innerHTML = `Results: ${film.total_results} ${film.total_pages}`
+  list.prepend(results);
+  
   renderPopularMovies(film.results);
   events();
 };
